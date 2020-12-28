@@ -1,0 +1,7 @@
+graft src
+graft tests
+
+include README.rst
+include LICENSE
+include Makefile
+include pylama.ini

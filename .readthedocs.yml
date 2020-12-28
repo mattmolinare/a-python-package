@@ -1,0 +1,19 @@
+version: 2
+
+formats:
+  - pdf
+
+build:
+  image: latest
+
+python:
+  version: 3.8  # https://docs.readthedocs.io/en/stable/config-file/v2.html#build-image
+  install:
+    - requirements: docs/requirements.txt
+    - method: pip
+    - path: .
+
+sphinx:
+  builder: html
+  configuration: docs/source/conf.py
+  fail_on_warning: true

@@ -1,0 +1,7 @@
+__pycache__
+build
+dist
+docs/_build
+src/*.egg-info
+.pytest_cache
+.coverage
