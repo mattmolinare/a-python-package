@@ -83,7 +83,7 @@ def linkcode_resolve(domain, info):
         while hasattr(obj, '__wrapped__'):
             obj = obj.__wrapped__
 
-    # Get file path relative to package directory.
+    # Get source file path relative to package directory.
     file = inspect.getsourcefile(obj)
     if file is None:
         return None
