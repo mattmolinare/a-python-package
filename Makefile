@@ -23,7 +23,7 @@ distribute: clean_distribution
 	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
 
 docs: clean_docs
-	sphinx-build docs/source docs/build -b html -W
+	@ sphinx-build docs/source docs/build -b html -W
 
 install:
 	@ $(PIP) install --upgrade .
