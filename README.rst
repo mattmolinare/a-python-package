@@ -4,11 +4,11 @@ A Python package
 .. image:: https://img.shields.io/pypi/pyversions/a-python-package
     :alt: PyPI - Python Version
 
-.. image:: https://img.shields.io/github/last-commit/mattmolinare/a-python-package
-    :alt: GitHub last commit
-
 .. image:: https://img.shields.io/pypi/v/a-python-package
     :alt: PyPI
+
+.. image:: https://img.shields.io/github/last-commit/mattmolinare/a-python-package
+    :alt: GitHub last commit
 
 .. image:: https://readthedocs.org/projects/a-python-package/badge/?version=latest
     :target: https://a-python-package.readthedocs.io/en/latest/?badge=latest
