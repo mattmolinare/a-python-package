@@ -15,3 +15,8 @@ A Python package
     :target: https://codecov.io/gh/mattmolinare/a-python-package
 
 This is an example Python package.
+
+.. code-block::
+
+    import foo
+    foo.bar.baz()
