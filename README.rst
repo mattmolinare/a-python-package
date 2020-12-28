@@ -4,6 +4,9 @@ A Python package
 .. image:: https://img.shields.io/pypi/pyversions/a-python-package
     :alt: PyPI - Python Version
 
+.. image:: https://img.shields.io/github/last-commit/mattmolinare/a-python-package
+    :alt: GitHub last commit
+
 .. image:: https://img.shields.io/pypi/v/a-python-package
     :alt: PyPI
 
@@ -13,6 +16,9 @@ A Python package
 
 .. image:: https://codecov.io/gh/mattmolinare/a-python-package/branch/main/graph/badge.svg?token=T1ZHDZLG7M
     :target: https://codecov.io/gh/mattmolinare/a-python-package
+
+.. image:: https://img.shields.io/github/license/mattmolinare/a-python-package
+    :alt: GitHub
 
 This is an example Python package.
 
