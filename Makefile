@@ -2,8 +2,9 @@ PYTHON := python
 PIP := $(PYTHON) -m pip
 PIP_INSTALL := $(PIP) install --upgrade
 RM := rm --force --recursive
+COVERAGE := $(PYTHON) -m coverage
 
-.PHONY: autodoc clean clean_coverage clean_distribution clean_docs clean_tests coverage docs distribute install install_extras isort lint publish test 
+.PHONY: autodoc clean clean_coverage clean_distribution clean_docs clean_tests coverage docs distribute install install_extras isort lint publish test upload_coverage
 
 autodoc:
 	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
@@ -26,9 +27,9 @@ clean_tests:
 	@ $(RM) .pytest_cache
 
 coverage: clean_coverage
-	@ coverage run -m pytest tests
-	@ coverage report --show-missing
-	@ bash <(curl -s https://codecov.io/bash) --verbose
+	@ $(COVERAGE) run -m pytest tests
+	@ $(COVERAGE) xml
+	@ $(COVERAGE) report --show-missing
 
 distribute: clean_distribution
 	@ $(PIP_INSTALL) twine
@@ -59,3 +60,6 @@ publish:
 
 test: clean_tests
 	@ pytest tests
+
+upload_coverage: coverage
+	@ bash <(curl -s https://codecov.io/bash) --verbose
