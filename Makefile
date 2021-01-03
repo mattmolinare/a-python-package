@@ -1,13 +1,18 @@
-PIP := pip
 PYTHON := python
+PIP := $(PYTHON) -m pip
+PIP_INSTALL := $(PIP) install --upgrade
 RM := rm --force --recursive
 
-.PHONY: autodoc clean clean_distribution clean_docs clean_tests docs distribute install install_extras isort lint test upload_codecov upload_testpypi
+.PHONY: autodoc clean clean_coverage clean_distribution clean_docs clean_tests coverage docs distribute install install_extras isort lint publish test 
 
 autodoc:
 	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
 
-clean: clean_distribution clean_docs clean_tests
+clean: clean_coverage clean_distribution clean_docs clean_tests
+
+clean_coverage:
+	@ $(RM) .coverage
+	@ $(RM) coverage.xml
 
 clean_distribution:
 	@ $(RM) build
@@ -19,24 +24,28 @@ clean_docs:
 
 clean_tests:
 	@ $(RM) .pytest_cache
-	@ $(RM) .coverage
+
+coverage: clean_coverage
+	@ coverage run -m pytest tests
+	@ coverage report --show-missing
+	@ bash <(curl -s https://codecov.io/bash) --verbose
 
 distribute: clean_distribution
-	@ $(PIP) install --upgrade twine
+	@ $(PIP_INSTALL) twine
 	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
 
 docs: clean_docs
 	@ sphinx-build docs/source docs/build -b html -W
 
 install:
-	@ $(PIP) install --upgrade .
+	@ $(PIP_INSTALL) .
 
 install_extras:
-	@ $(PIP) install --upgrade pip
-	@ $(PIP) install --upgrade setuptools wheel
-	@ $(PIP) install --upgrade --editable .[lint]
-	@ $(PIP) install --upgrade --editable .[test]
-	@ $(PIP) install --upgrade --editable .[docs]
+	@ $(PIP_INSTALL) pip
+	@ $(PIP_INSTALL) setuptools wheel
+	@ $(PIP_INSTALL) --editable .[lint]
+	@ $(PIP_INSTALL) --editable .[test]
+	@ $(PIP_INSTALL) --editable .[docs]
 
 isort:
 	@ isort src
@@ -44,13 +53,9 @@ isort:
 lint:
 	@ pylama src
 
+publish:
+	@ twine upload dist/*
+	# @ twine upload --repository testpypi dist/*
+
 test: clean_tests
 	@ pytest tests
-	@ coverage run -m pytest tests
-	@ coverage report --show-missing
-
-upload_codecov:
-	@ bash <(curl -s https://codecov.io/bash) -v
-
-upload_testpypi:
-	@ twine upload --repository testpypi dist/*
