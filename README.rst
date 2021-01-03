@@ -11,6 +11,9 @@ A Python package
 .. image:: https://img.shields.io/github/last-commit/mattmolinare/a-python-package
     :alt: GitHub last commit
 
+.. image:: https://img.shields.io/github/workflow/status/mattmolinare/a-python-package/On%20push%20and%20pull%20request
+    :alt: GitHub Workflow Status
+
 .. image:: https://readthedocs.org/projects/a-python-package/badge/?version=latest
     :target: https://a-python-package.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
