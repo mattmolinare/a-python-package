@@ -1,8 +1,8 @@
 PYTHON := python
 PIP := $(PYTHON) -m pip
 PIP_INSTALL := $(PIP) install --upgrade
-RM := rm --force --recursive
 COVERAGE := $(PYTHON) -m coverage
+RM := rm -rf
 
 .PHONY: autodoc clean clean_coverage clean_distribution clean_docs clean_tests coverage docs distribute install install_extras isort lint publish test upload_coverage
 
