@@ -4,43 +4,52 @@ PIP_INSTALL := $(PIP) install --upgrade
 COVERAGE := $(PYTHON) -m coverage
 RM := rm -rf
 
-.PHONY: autodoc clean clean_coverage clean_distribution clean_docs clean_tests coverage docs distribute install install_extras isort lint publish test upload_coverage
-
+.PHONY: autodoc
 autodoc:
 	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
 
+.PHONY: clean
 clean: clean_coverage clean_distribution clean_docs clean_tests
 
+.PHONY: clean_coverage
 clean_coverage:
 	@ $(RM) .coverage
 	@ $(RM) coverage.xml
 
+.PHONY: clean_distribution
 clean_distribution:
 	@ $(RM) build
 	@ $(RM) dist
 	@ $(RM) src/*.egg-info
 
+.PHONY: clean_docs
 clean_docs:
 	@ $(RM) docs/build
 
+.PHONY: clean_tests
 clean_tests:
 	@ $(RM) .pytest_cache
 
+.PHONY: coverage
 coverage: clean_coverage
 	@ $(COVERAGE) run -m pytest tests
 	@ $(COVERAGE) xml
 	@ $(COVERAGE) report --show-missing
 
+.PHONY: distribute
 distribute: clean_distribution
 	@ $(PIP_INSTALL) twine
 	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
 
+.PHONY: docs
 docs: clean_docs
 	@ sphinx-build docs/source docs/build -b html -W
 
+.PHONY: install
 install:
 	@ $(PIP_INSTALL) .
 
+.PHONY: install_extras
 install_extras:
 	@ $(PIP_INSTALL) pip
 	@ $(PIP_INSTALL) setuptools wheel
@@ -48,18 +57,23 @@ install_extras:
 	@ $(PIP_INSTALL) --editable .[test]
 	@ $(PIP_INSTALL) --editable .[docs]
 
+.PHONY: isort
 isort:
 	@ isort src
 
+.PHONY: lint
 lint:
 	@ pylama src
 
+.PHONY: publish
 publish:
 	@ twine upload dist/*
 	# @ twine upload --repository testpypi dist/*
 
+.PHONY: clean_tests
 test: clean_tests
 	@ pytest tests
 
+.PHONY: upload_coverage
 upload_coverage: coverage
 	@ bash <(curl -s https://codecov.io/bash) --verbose
