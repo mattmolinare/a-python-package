@@ -54,7 +54,7 @@ isort:
 lint:
 	@ pylama src
 
-.PHONY: clean_tests
+.PHONY: test
 test: clean_tests
 	@ pytest tests
 
