@@ -4,10 +4,6 @@ PIP_INSTALL := $(PIP) install --upgrade
 COVERAGE := $(PYTHON) -m coverage
 RM := rm -rf
 
-.PHONY: autodoc
-autodoc:
-	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
-
 .PHONY: clean
 clean: clean_coverage clean_distribution clean_docs clean_tests
 
@@ -30,16 +26,9 @@ clean_docs:
 clean_tests:
 	@ $(RM) .pytest_cache
 
-.PHONY: coverage
-coverage: clean_coverage
-	@ $(COVERAGE) run -m pytest tests
-	@ $(COVERAGE) xml
-	@ $(COVERAGE) report --show-missing
-
-.PHONY: distribute
-distribute: clean_distribution
-	@ $(PIP_INSTALL) twine
-	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
+.PHONY: autodoc
+autodoc:
+	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
 
 .PHONY: docs
 docs: clean_docs
@@ -65,14 +54,25 @@ isort:
 lint:
 	@ pylama src
 
+.PHONY: clean_tests
+test: clean_tests
+	@ pytest tests
+
+.PHONY: distribute
+distribute: clean_distribution
+	@ $(PIP_INSTALL) twine
+	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
+
 .PHONY: publish
 publish:
 	@ twine upload dist/*
 	# @ twine upload --repository testpypi dist/*
 
-.PHONY: clean_tests
-test: clean_tests
-	@ pytest tests
+.PHONY: coverage
+coverage: clean_coverage
+	@ $(COVERAGE) run -m pytest tests
+	@ $(COVERAGE) xml
+	@ $(COVERAGE) report --show-missing
 
 .PHONY: upload_coverage
 upload_coverage: coverage
