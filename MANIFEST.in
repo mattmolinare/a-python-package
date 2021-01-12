@@ -5,3 +5,11 @@ include README.rst
 include LICENSE
 include Makefile
 include pylama.ini
+include .readthedocs.yml
+
+graft docs
+prune docs/build
+prune docs/source/generated
+
+prune */__pycache__
+global-exclude *.pyc *.pyo *.pyd *.swp *.bak *~
