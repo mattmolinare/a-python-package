@@ -4,6 +4,8 @@ PIP_INSTALL := $(PIP) install --upgrade
 COVERAGE := $(PYTHON) -m coverage
 RM := rm -rf
 
+.DEFAULT_GOAL := install
+
 .PHONY: clean
 clean: clean_coverage clean_distribution clean_docs clean_tests
 
