@@ -23,6 +23,7 @@ clean_distribution:
 .PHONY: clean_docs
 clean_docs:
 	@ $(RM) docs/build
+	@ $(RM) docs/source/generated
 
 .PHONY: clean_tests
 clean_tests:
@@ -30,7 +31,7 @@ clean_tests:
 
 .PHONY: autodoc
 autodoc:
-	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source src/foo
+	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source/generated src/foo
 
 .PHONY: docs
 docs: clean_docs
