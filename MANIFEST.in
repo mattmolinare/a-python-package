@@ -12,4 +12,4 @@ prune docs/build
 prune docs/source/generated
 
 global-exclude __pycache__
-global-exclude *.py[cod] *.swp *.bak *~
+global-exclude *.py[cod]
