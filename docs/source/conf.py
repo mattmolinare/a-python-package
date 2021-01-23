@@ -19,12 +19,23 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.linkcode',
     'sphinx.ext.mathjax',
-    'sphinx.ext.napoleon'
+    'numpydoc'
 ]
 
-napolean_google_docstring = False
-napolean_use_param = False
-napolean_use_ivar = True
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/dev/', None),
+    'numpy': ('https://numpy.org/doc/stable/', None)
+}
+
+numpydoc_xref_param_type = True
+numpydoc_xref_ignore = {
+    'or',
+    'optional'
+}
+numpydoc_xref_aliases = {
+    'ndarray': 'numpy.ndarray',
+    'array_like': ':term:`numpy:array_like`'
+}
 
 master_doc = 'index'
 

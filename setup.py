@@ -62,6 +62,7 @@ setuptools.setup(
         '': 'src',  # Use relative path
     },
     install_requires=[
+        'numpy'
     ],
     extras_require={
         'test': [
