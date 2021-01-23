@@ -16,14 +16,16 @@ def baz(a, b=None):
 
     Parameters
     ----------
-    a : array_like
+    a : :term:`numpy:array_like`
         An array_like parameter.
-    b : None or array_like, optional
+    b : None or :term:`numpy:array_like`, optional
         An optional array_like parameter. If None (default), use `a`.
+    c : int
+        Blah.
 
     Returns
     -------
-    c : ndarray
+    c : :class:`numpy.ndarray`
         An array.
 
     Examples
