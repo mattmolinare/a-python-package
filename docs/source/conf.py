@@ -65,7 +65,7 @@ def _get_revision():
         return 'main'
 
 
-_REVISION = _get_revision()
+_revision = _get_revision()
 
 
 def linkcode_resolve(domain, info):
@@ -108,4 +108,4 @@ def linkcode_resolve(domain, info):
     last_line_no = first_line_no + len(lines) - 1
     line_spec = f'#L{first_line_no}-L{last_line_no}'
 
-    return f'{foo.__url__}/blob/{_REVISION}/src/foo/{file}/{line_spec}'
+    return f'{foo.__url__}/blob/{_revision}/src/foo/{file}/{line_spec}'
