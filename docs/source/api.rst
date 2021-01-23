@@ -1,8 +1,12 @@
-foo package
-===========
+=============
+API Reference
+=============
 
-foo.bar module
---------------
+Package :mod:`foo`
+==================
+
+Module :mod:`foo.bar`
+---------------------
 
 .. automodule:: foo.bar
    :members:
