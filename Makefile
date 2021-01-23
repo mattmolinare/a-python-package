@@ -45,9 +45,7 @@ install:
 install_extras:
 	@ $(PIP_INSTALL) pip
 	@ $(PIP_INSTALL) setuptools wheel
-	@ $(PIP_INSTALL) --editable .[lint]
-	@ $(PIP_INSTALL) --editable .[test]
-	@ $(PIP_INSTALL) --editable .[docs]
+	@ $(PIP_INSTALL) --editable .[lint,test,docs]
 
 .PHONY: isort
 isort:
