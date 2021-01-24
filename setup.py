@@ -49,8 +49,6 @@ setuptools.setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Topic :: Software Development',
@@ -62,7 +60,7 @@ setuptools.setup(
         '': 'src',  # Use relative path
     },
     install_requires=[
-        'numpy'
+        'numpy @ git+https://github.com/numpy/numpy.git'
     ],
     extras_require={
         'test': [
@@ -71,11 +69,12 @@ setuptools.setup(
         ],
         'lint': [
             'pylama',
-            'isort'
+            'isort',
+            'mypy'
         ],
         'docs': docs_requirements
     },
-    python_requires='>=3.6',
+    python_requires='>=3.8',  # https://numpy.org/devdocs/reference/typing.html#typing-numpy-typing
     package_data={
     },
     include_package_data=True,
