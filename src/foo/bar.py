@@ -20,8 +20,6 @@ def baz(a, b=None):
         An array_like parameter.
     b : None or :term:`numpy:array_like`, optional
         An optional array_like parameter. If None (default), use `a`.
-    c : int
-        Blah.
 
     Returns
     -------
