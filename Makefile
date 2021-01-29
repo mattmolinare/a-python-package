@@ -61,11 +61,11 @@ test: clean_tests
 
 .PHONY: distribute
 distribute: clean_distribution
-	@ $(PIP_INSTALL) twine
 	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
 
 .PHONY: publish
 publish:
+	@ $(PIP_INSTALL) twine
 	@ twine upload dist/*
 	# @ twine upload --repository testpypi dist/*
 
