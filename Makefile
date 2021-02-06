@@ -7,28 +7,16 @@ RM := rm -rf
 
 .DEFAULT_GOAL := install
 
-.PHONY: clean
-clean: clean_coverage clean_distribution clean_docs clean_tests
-
-.PHONY: clean_coverage
-clean_coverage:
-	@ $(RM) .coverage
-	@ $(RM) coverage.xml
-
-.PHONY: clean_distribution
-clean_distribution:
-	@ $(RM) build
-	@ $(RM) dist
-	@ $(RM) src/*.egg-info
+.PHONY: install
+install:
+	@ $(PIP_INSTALL) pip
+	@ $(PIP_INSTALL) setuptools wheel
+	@ $(PIP_INSTALL) .
 
 .PHONY: clean_docs
 clean_docs:
 	@ $(RM) docs/build
 	@ $(RM) docs/source/generated
-
-.PHONY: clean_tests
-clean_tests:
-	@ $(RM) .pytest_cache
 
 .PHONY: autodoc
 autodoc:
@@ -38,11 +26,13 @@ autodoc:
 docs: clean_docs
 	@ sphinx-build docs/source docs/build -b html -W
 
-.PHONY: install
-install:
-	@ $(PIP_INSTALL) pip
-	@ $(PIP_INSTALL) setuptools wheel
-	@ $(PIP_INSTALL) .
+.PHONY: clean_tests
+clean_tests:
+	@ $(RM) .pytest_cache
+
+.PHONY: test
+test: clean_tests
+	@ pytest tests
 
 .PHONY: isort
 isort:
@@ -52,9 +42,26 @@ isort:
 lint:
 	@ pylama src
 
-.PHONY: test
-test: clean_tests
-	@ pytest tests
+.PHONY: clean_coverage
+clean_coverage:
+	@ $(RM) .coverage
+	@ $(RM) coverage.xml
+
+.PHONY: coverage
+coverage: clean_coverage
+	@ $(COVERAGE) run -m pytest tests
+	@ $(COVERAGE) xml
+	@ $(COVERAGE) report --show-missing
+
+.PHONY: upload_coverage
+upload_coverage: coverage
+	@ bash <(curl -s https://codecov.io/bash) --verbose
+
+.PHONY: clean_distribution
+clean_distribution:
+	@ $(RM) build
+	@ $(RM) dist
+	@ $(RM) src/*.egg-info
 
 .PHONY: distribute
 distribute: clean_distribution
@@ -66,12 +73,5 @@ publish:
 	@ twine upload dist/*
 	# @ twine upload --repository testpypi dist/*
 
-.PHONY: coverage
-coverage: clean_coverage
-	@ $(COVERAGE) run -m pytest tests
-	@ $(COVERAGE) xml
-	@ $(COVERAGE) report --show-missing
-
-.PHONY: upload_coverage
-upload_coverage: coverage
-	@ bash <(curl -s https://codecov.io/bash) --verbose
+.PHONY: clean
+clean: clean_coverage clean_distribution clean_docs clean_tests
