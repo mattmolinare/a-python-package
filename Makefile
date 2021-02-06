@@ -40,13 +40,9 @@ docs: clean_docs
 
 .PHONY: install
 install:
-	@ $(PIP_INSTALL) .
-
-.PHONY: install_extras
-install_extras:
 	@ $(PIP_INSTALL) pip
 	@ $(PIP_INSTALL) setuptools wheel
-	@ $(PIP_INSTALL) --editable .[lint,test,docs]
+	@ $(PIP_INSTALL) .
 
 .PHONY: isort
 isort:
