@@ -1,3 +1,4 @@
+PACKAGE_NAME := a-python-package
 PYTHON := python
 PIP := $(PYTHON) -m pip
 PIP_INSTALL := $(PIP) install --upgrade
@@ -31,7 +32,7 @@ clean_tests:
 
 .PHONY: autodoc
 autodoc:
-	@ sphinx-apidoc --force --doc-project a-python-package --output-dir docs/source/generated src/foo
+	@ sphinx-apidoc --force --doc-project $(PACKAGE_NAME) --output-dir docs/source/generated src
 
 .PHONY: docs
 docs: clean_docs
