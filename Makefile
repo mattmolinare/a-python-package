@@ -4,6 +4,7 @@ PIP := $(PYTHON) -m pip
 PIP_INSTALL := $(PIP) install --upgrade
 COVERAGE := $(PYTHON) -m coverage
 RM := rm -rf
+CONDA := conda
 
 .DEFAULT_GOAL := install
 
@@ -57,21 +58,35 @@ coverage: clean_coverage
 upload_coverage: coverage
 	@ bash <(curl -s https://codecov.io/bash) --verbose
 
-.PHONY: clean_distribution
-clean_distribution:
+.PHONY: clean_pypi
+clean_pypi:
 	@ $(RM) build
 	@ $(RM) dist
 	@ $(RM) src/*.egg-info
 
-.PHONY: distribute
-distribute: clean_distribution
+.PHONY: distribute_pypi
+distribute_pypi: clean_pypi
 	@ $(PYTHON) setup.py --quiet sdist bdist_wheel
 
-.PHONY: publish
-publish:
+.PHONY: publish_pypi
+publish_pypi:
 	@ $(PIP_INSTALL) twine
 	@ twine upload dist/*
-	# @ twine upload --repository testpypi dist/*
+
+.PHONY: clean_anaconda
+clean_anaconda:
+	@ $(RM) .conda_cache
+
+.PHONY: distribute_anaconda
+distribute_anaconda: clean_anaconda
+	@ $(CONDA) install conda-build
+	@ $(CONDA) skeleton pypi $(PACKAGE_NAME) --output-dir .conda_cache/recipes
+	@ conda-build .conda_cache/recipes/$(PACKAGE_NAME)
+
+.PHONY: publish_anaconda
+publish_anaconda:
+	@ $(CONDA) install anaconda-client
+	@ anaconda upload $$(conda-build .conda_cache/recipes/$(PACKAGE_NAME) --output) --all --skip-existing
 
 .PHONY: clean
-clean: clean_coverage clean_distribution clean_docs clean_tests
+clean: clean_docs clean_tests clean_coverage clean_pypi clean_anaconda

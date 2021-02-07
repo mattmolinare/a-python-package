@@ -6,3 +6,4 @@ src/*.egg-info
 .pytest_cache
 .coverage
 coverage.xml
+.conda_cache

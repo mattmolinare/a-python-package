@@ -10,6 +10,10 @@ A Python package
     :target: https://pypi.org/project/a-python-package/
     :alt: PyPI Package Version
 
+.. image:: https://img.shields.io/conda/v/mattmolinare/a-python-package
+    :target: https://anaconda.org/mattmolinare/a-python-package
+    :alt: Anaconda Package Version
+
 .. image:: https://img.shields.io/github/last-commit/mattmolinare/a-python-package
     :target: https://github.com/mattmolinare/a-python-package
     :alt: Last Commit
@@ -36,3 +40,18 @@ This is an example Python package.
 
     import foo
     foo.bar.baz()
+
+Installation
+============
+
+To install from PyPI:
+
+.. code-block::
+
+    pip install a-python-package
+
+To install from Anaconda Cloud:
+
+.. code-block::
+
+    conda install -c mattmolinare a-python-package
