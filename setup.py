@@ -61,8 +61,16 @@ setuptools.setup(
     package_dir={
         '': 'src',  # Use relative path
     },
+    # https://python-packaging.readthedocs.io/en/latest/command-line-scripts.html#the-console-scripts-entry-point
+    # https://click.palletsprojects.com/en/7.x/setuptools/
+    entry_points={
+        'console_scripts': [
+            'foo=foo.__main__:cli'
+        ]
+    },
     install_requires=[
-        'numpy'
+        'numpy',
+        'click'
     ],
     extras_require={
         'test': [
