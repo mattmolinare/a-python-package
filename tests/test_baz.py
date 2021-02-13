@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import numpy as np
 
 import foo
@@ -12,7 +14,6 @@ class TestBaz:
         assert np.allclose(foo.bar.baz(a, b), c)
 
     def test_optional_parameter(self):
-        seed = 0
-        random_state = np.random.RandomState(seed=seed)
-        a = random_state.random(100)
+        rng = np.random.default_rng(0)
+        a = rng.random(1000)
         assert np.allclose(foo.bar.baz(a), foo.bar.baz(a, a))
