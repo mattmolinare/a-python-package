@@ -76,10 +76,6 @@ setuptools.setup(
         'docs': docs_requirements
     },
     python_requires='>=3.6',
-    package_data={
-    },
     include_package_data=True,
-    data_files=[
-    ],
     zip_safe=False
 )
