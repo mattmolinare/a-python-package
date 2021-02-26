@@ -2,8 +2,6 @@
 
 import click
 
-import foo
-
 
 @click.command()
 def cli():
