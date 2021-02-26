@@ -39,7 +39,7 @@ This is an example Python package.
 .. code-block::
 
     import foo
-    foo.bar.baz()
+    assert foo.bar.baz(3, 4) == 5
 
 Installation
 ============
