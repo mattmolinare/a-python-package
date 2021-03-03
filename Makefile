@@ -39,8 +39,12 @@ test: clean_tests
 isort:
 	@ isort src
 
+.PHONY: clean_lint
+clean_lint:
+	@ $(RM) .mypy_cache
+
 .PHONY: lint
-lint:
+lint: clean_lint
 	@ pylama src
 
 .PHONY: clean_coverage
@@ -89,4 +93,4 @@ publish_anaconda:
 	@ anaconda upload $$(conda-build .conda_cache/recipes/$(PACKAGE_NAME) --output) --all --skip-existing
 
 .PHONY: clean
-clean: clean_docs clean_tests clean_coverage clean_pypi clean_anaconda
+clean: clean_docs clean_tests clean_lint clean_coverage clean_pypi clean_anaconda
