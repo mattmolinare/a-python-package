@@ -85,7 +85,7 @@ clean_anaconda:
 distribute_anaconda: clean_anaconda
 	@ $(CONDA) install conda-build
 	@ $(CONDA) skeleton pypi $(PACKAGE_NAME) --output-dir .conda_cache/recipes
-	@ conda-build .conda_cache/recipes/$(PACKAGE_NAME)
+	@ conda-build -c defaults -c conda-forge .conda_cache/recipes/$(PACKAGE_NAME)
 
 .PHONY: publish_anaconda
 publish_anaconda:
