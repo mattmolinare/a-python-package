@@ -1,13 +1,19 @@
 """A Python module."""
 
+from typing import Optional
+
 import numpy as np
+import numpy.typing as npt
 
 __all__ = [
     'baz'
 ]
 
 
-def baz(a, b=None):
+def baz(
+    a: npt.ArrayLike,
+    b: Optional[npt.ArrayLike] = None,
+) -> np.ndarray:
     """A Python function.
 
     Here is some math:

@@ -22,6 +22,8 @@ extensions = [
     'numpydoc'
 ]
 
+autodoc_typehints = 'none'
+
 intersphinx_mapping = {
     'python': ('https://docs.python.org/dev/', None),
     'numpy': ('https://numpy.org/doc/stable/', None)

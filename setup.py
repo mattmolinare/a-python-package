@@ -69,7 +69,7 @@ setuptools.setup(
         ]
     },
     install_requires=[
-        'numpy',
+        'numpy>=1.20',
         'click'
     ],
     extras_require={
@@ -79,7 +79,8 @@ setuptools.setup(
         ],
         'lint': [
             'pylama',
-            'isort'
+            'isort',
+            'mypy'
         ],
         'docs': docs_requirements
     },
